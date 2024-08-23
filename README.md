@@ -5,4 +5,4 @@ RPG where my (real-life) gf eats strawberries and fights bananas
 - Bare C++
 - SDL2 for graphics
 
-Cred: inspired by Carl Birch's C++ game tutorials (https://www.youtube.com/playlist?list=PLhfAbcv9cehhkG7ZQK0nfIGJC_C-wSLrx)
+Cred: inspired by Let's Make Games's C++ game tutorials (https://www.youtube.com/playlist?list=PLhfAbcv9cehhkG7ZQK0nfIGJC_C-wSLrx)
