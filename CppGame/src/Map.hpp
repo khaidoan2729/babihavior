@@ -10,15 +10,15 @@
 
 class Map {
 
-public: 
-     Map();   //Constructor
-     ~Map();  //Destructor
+     public: 
+          Map();   //Constructor
+          ~Map();  //Destructor
+
+          static void LoadMap(std::string path, int sizeX, int sizeY);
 
 
-     static void LoadMap(std::string path, int sizeX, int sizeY);
-
-
-private: 
+     private: 
+     
 };
 
 //#endif 

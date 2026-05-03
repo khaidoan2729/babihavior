@@ -12,36 +12,41 @@
 #include "../Game.hpp"
 #include "Components.hpp"
 
+/* 
+ * Collidable components class 
+ */
 class ColliderComponent : public Component {
 
-public: 
-     SDL_Rect collider;
-     std::string tag;
+     public: 
+          SDL_Rect collider;
+          std::string tag;
+          TransformComponent* transform;
 
-     ColliderComponent (std::string t) {
-          tag = t;
-     }
-
-     TransformComponent* transform;
-
-     void init() override {
-          if (!entity->hasComponent<TransformComponent>()) {
-               entity->addComponent<TransformComponent>();
+          /* Constructor */
+          ColliderComponent (std::string t) {
+               tag = t;
           }
-          transform = &entity->getComponent<TransformComponent>();
-          Game::colliders.push_back(this);
-     }
 
+          /* Init function. */
+          void init() override {
+               /* Add transform component if not there already. */
+               if (!entity->hasComponent<TransformComponent>()) {
+                    entity->addComponent<TransformComponent>();
+               }
+               transform = &entity->getComponent<TransformComponent>();
+               Game::colliders.push_back(this);
+          }
 
-     void update() override {
+          /* Update component positione and size. */
+          void update() override {
 
-          collider.x = static_cast<int>(transform->position.x);
-          collider.y = static_cast<int>(transform->position.y);
-          collider.w = transform->width * transform->scale;
-          collider.h = transform->height * transform->scale;
-     }
+               collider.x = static_cast<int>(transform->position.x);
+               collider.y = static_cast<int>(transform->position.y);
+               collider.w = transform->width * transform->scale;
+               collider.h = transform->height * transform->scale;
+          }
 
-private: 
+     private: 
 
 };
 

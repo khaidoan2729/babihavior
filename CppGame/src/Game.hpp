@@ -15,36 +15,40 @@ class ColliderComponent;
 class Game {
 
 public: 
-     Game();   //Constructor
-     ~Game();  //Destructor
+     Game();
+     ~Game();
 
      void init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
      void handleEvents();
      void update();
      void render();
      void clean();
-     bool running();   // Let program know if the game is still running => continue loop
+
+     /* Let program know if the game is still running, if yes continue loop */
+     bool running();  
 
      static SDL_Renderer* renderer;
      static SDL_Event event;
      static std::vector<ColliderComponent*> colliders;
-     static void AddTile(int id, int x, int y);
      static bool isRunning;
      static int gameWidth;
      static int gameHeight;
+     static int tileWidth;
+     static int tileHeight;
      static void AddGround(const char* path, int y);
 
 private: 
-     //bool isRunning;
      SDL_Window *window;
      int cnt;
 
      void isPlayer(Entity* e);
-     void Land(Entity* player, std::vector<Entity*>& grounds);
      void GetCoin(Entity* player, Entity* coin);
-     void handleJump(Entity *player);
-     void handleCollide(Entity* player, std::vector<Entity*>& collides);
+     void handleCollideColliders(Entity* player, std::vector<Entity*>& collides);
 
+     void setBoundaries();
+     void handleCollideBoundaries(Entity*player, std::vector<Entity*>& bounds);
+     void handleEnemies(Entity*player, std::vector<Entity*>& enemies);
+     void addTiles();
 };
 
 //#endif // DEBUG

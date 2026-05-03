@@ -13,42 +13,42 @@
 
 class TileComponent : public Component {
 
-public: 
-     TransformComponent* transform;
-     SpriteComponent* sprite; 
-     int tileID;
-     SDL_Rect tileRect;
+     public: 
+          TransformComponent* transform;
+          SpriteComponent* sprite; 
+          int tileID;
+          SDL_Rect tileRect;
 
-     const char* path;
+          const char* path;
 
-     TileComponent() = default;
+          TileComponent() = default;
 
-     TileComponent(int x, int y, int w, int h, int id) {
-          tileRect.x = x;
-          tileRect.y = y;
-          tileRect.w = w;
-          tileRect.h = h;
-          tileID = id;
+          /* Constructor with position, size and id */
+          TileComponent(int x, int y, int w, int h, int id) {
+               tileRect.x = x;
+               tileRect.y = y;
+               tileRect.w = w;
+               tileRect.h = h;
+               tileID = id;
 
-          if (id == 0) {
-               path = "assets/world/bg_water_64x64.png";
-          } else if (id == 1) {
-               path = "assets/world/bg_dirt_64x64.png";
-          } else if (id == 2) {
-               path = "assets/world/bg_grass_64x64.png";
+               if (id == 0) {
+                    path = "assets/world/bg_water_64x64.png";
+               } else if (id == 1) {
+                    path = "assets/world/bg_dirt_64x64.png";
+               } else if (id == 2) {
+                    path = "assets/world/bg_grass_64x64.png";
+               }
           }
 
-     }
+          /* Init function add transform component and sprite component to entity. */
+          void init() override {
+               entity->addComponent<TransformComponent>((float)tileRect.x, (float)tileRect.y, tileRect.w, tileRect.h, 1);
+               transform = &entity->getComponent<TransformComponent>();
+               entity->addComponent<SpriteComponent>(path);
+               sprite = &entity->getComponent<SpriteComponent>();
+          }
 
-     void init() override {
-          entity->addComponent<TransformComponent>((float)tileRect.x, (float)tileRect.y, tileRect.w, tileRect.h, 1);
-          transform = &entity->getComponent<TransformComponent>();
-          entity->addComponent<SpriteComponent>(path);
-          sprite = &entity->getComponent<SpriteComponent>();
-
-     }
-
-private: 
+     private: 
 
 };
 

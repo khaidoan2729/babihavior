@@ -1,28 +1,35 @@
 #include "Collision.hpp"
 #include "ECS/ColliderComponent.hpp"
 
-bool Collision::AABB(const SDL_Rect& recA, const SDL_Rect& recB) {
 
-     if (
+/* AABB collision with SDL rectangles */
+bool Collision::AABB(const SDL_Rect& recA, const SDL_Rect& recB) {
+     if (      /* AABB collision condition */
           recA.x + recA.w >= recB.x &&
           recB.x + recB.w >= recA.x &&
           recA.y + recA.h >= recB.y &&
           recB.y + recB.h >= recA.y 
-     ) {
-          return true;
-     }
-     return false;
-}
-
-bool Collision::AABB(const ColliderComponent& colA, const ColliderComponent& colB) {
-     if (AABB(colA.collider, colB.collider)) {
-          //std::cout << colA.tag << " hit " << colB.tag << std::endl;
-          return true;
-     }
+     ) return true;
      
      return false;
 }
 
+/* AABB collision with collider component */
+bool Collision::AABB(const ColliderComponent& colA, const ColliderComponent& colB) {
+     if (AABB(colA.collider, colB.collider)) {
+          return true;
+     }
+     return false;
+}
+
+/* 
+ * AABB collision with collider component and return the side of collision:
+ *   0: no collision
+ *   1: left 
+ *   2: right 
+ *   3: top
+ *   4: bottom 
+ */
 int Collision::AABBSides(const ColliderComponent& colA, const ColliderComponent& colB) {
      if (AABB(colA.collider, colB.collider)) {
           int xA = colA.collider.x;
@@ -45,9 +52,9 @@ int Collision::AABBSides(const ColliderComponent& colA, const ColliderComponent&
                w_ = xA + wA - xB;
           } else {
                if (yA <= yB) {
-                    return 3;   // top
+                    return 3;   
                } else {
-                    return 4;   // bottom
+                    return 4;
                }
           }
 
@@ -57,8 +64,8 @@ int Collision::AABBSides(const ColliderComponent& colA, const ColliderComponent&
           } else if (yA + hA - yB < yB + hB - yA) {
                h_ = yA + hA - yB;
           } else {
-               if (left) return 1;    // left
-               else return 2;         // right
+               if (left) return 1;
+               else return 2;
           }
 
           if (w_ > h_) {
@@ -68,10 +75,7 @@ int Collision::AABBSides(const ColliderComponent& colA, const ColliderComponent&
                if (left) return 1;
                else return 2;
           }
-
      }
 
-
      return 0;
-
 }

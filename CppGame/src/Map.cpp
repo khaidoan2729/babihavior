@@ -18,7 +18,7 @@ void Map::LoadMap(std::string path, int sizeX, int sizeY) {
      for (int y = 0; y < sizeY; y++) {
           for (int x = 0; x < sizeX; x++) {
                mapFile.get(tile);
-               Game::AddTile(1 /*atoi(&tile)*/, x * 64, y * 64);
+               //Game::AddTile(1 /*atoi(&tile)*/, x * 64, y * 64);
                mapFile.ignore();
           }
      }

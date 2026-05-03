@@ -10,20 +10,20 @@
 
 class GameObject {
 
-public: 
-     GameObject(const char* texturesheet, int x, int y);   //Constructor
-     ~GameObject();  //Destructor
+     public: 
+          GameObject(const char* texturesheet, int x, int y);   
+          ~GameObject();  //Destructor
 
-     void Update();
-     void Render();
+          void Update();
+          void Render();
 
-private: 
-     // x,y position to draw on screen
-     int xpos;
-     int ypos;
-      
-     SDL_Texture* objTexture;
-     SDL_Rect srcRect, destRect;
+     private: 
+          /* x,y position to draw on screen */
+          int xpos;
+          int ypos;
+
+          SDL_Texture* objTexture;
+          SDL_Rect srcRect, destRect;
  
 };
 

@@ -2,6 +2,7 @@
 #include "TextureManager.hpp" 
 
 
+/* Constructor */
 GameObject::GameObject(const char* texturesheet_, int x_, int y_) {
      objTexture = TextureManager::LoadTexture(texturesheet_);
      xpos = x_;
@@ -21,10 +22,8 @@ void GameObject::Update() {
      destRect.h = srcRect.h * 2;
      destRect.x = xpos;
      destRect.y = ypos;
-
 }
 
 void GameObject::Render() {
      SDL_RenderCopy(Game::renderer, objTexture, &srcRect, &destRect);
 }
-
